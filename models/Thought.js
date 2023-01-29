@@ -1,39 +1,22 @@
-const { Schema, Types } = require('mongoose');
+// Thought:
 
-const userSchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    username: {
-        required: true, 
-        unique: true, 
-        trim: true 
-    },
-    email: {
-        type: String, 
-        required: true, 
-        unique: true, 
-        match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/], 
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+// thoughtText
 
-    //thoughts, friends.
-  },
-  {
-    toJSON: {
-      virtuals: true,
-      getters: true,
-    },
-    id: false,
-  }
-);
+// String
+// Required
+// Must be between 1 and 280 characters
+// createdAt
 
-const User = model('user', userSchema);
-module.exports = User;
+// Date
+// Set default value to the current timestamp
+// Use a getter method to format the timestamp on query
+// username (The user that created this thought)
 
-//Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+// String
+// Required
+// reactions (These are like replies)
+
+// Array of nested documents created with the reactionSchema
+// Schema Settings:
+
+// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
