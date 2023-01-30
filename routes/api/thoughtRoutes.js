@@ -16,6 +16,19 @@
 
 // DELETE to remove a thought by its _id
 
+
+const router = require('express').Router();
+const {getThought,getSingleThought,createThought,updateThought, deleteThought,} = require ('../../controllers/thoughtController');
+
+router.route('/').get(getThought).post(createThought);
+
+router
+  .route('/:thoughtId')
+  .get(getSingleThought)
+  .put(updateThought)
+  .delete(deleteThought);
+
+
 // /api/thoughts/:thoughtId/reactions
 
 // POST to create a reaction stored in a single thought's reactions array field

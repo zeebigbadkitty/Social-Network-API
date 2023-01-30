@@ -32,7 +32,7 @@ router
 
   // /api/users/:userId/friends/:friendId
 
-  // POST to add a new friend to a user's friend list
+  router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
 
-// DELETE to remove a friend from a user's friend list
+
 // (/api/user) brings us here.
