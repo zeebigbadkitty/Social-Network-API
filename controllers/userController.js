@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 module.exports = {
-  getUsers(req, res) {
+  getUser(req, res) {
     User.find()
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
@@ -22,3 +22,11 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 };
+
+//update user
+
+//delete user
+
+//add friend
+
+//delete friend

@@ -40,5 +40,5 @@ reactionSchema.virtual("formattedDate").get(function() {
   });
 
 
-const Reaction = model('reaction', reactionSchema);
-module.exports = Reaction;
+// const Reaction = model('reaction', reactionSchema);
+module.exports = reactionSchema;
