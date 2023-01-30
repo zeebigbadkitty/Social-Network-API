@@ -19,7 +19,6 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      //Use a getter method to format the timestamp on query
     },
     reactions: {
     //reactions (These are like replies) Array of nested documents created with the reactionSchema
@@ -32,6 +31,12 @@ const thoughtSchema = new Schema(
     id: false,
   }
 );
+
+thoughtSchema.virtual("formattedDate").get(function() {
+    const date = this.createdAt;
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  });
+
 
 const Thought = model('thought', thoughtSchema);
 module.exports = Thought;

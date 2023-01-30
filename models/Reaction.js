@@ -21,7 +21,6 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      //Use a getter method to format the timestamp on query
     },
 
   },
@@ -32,6 +31,14 @@ const reactionSchema = new Schema(
     id: false,
   }
 );
+
+//Use a getter method to format the timestamp on a query.
+
+reactionSchema.virtual("formattedDate").get(function() {
+    const date = this.createdAt;
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  });
+
 
 const Reaction = model('reaction', reactionSchema);
 module.exports = Reaction;
