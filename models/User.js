@@ -1,4 +1,4 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
@@ -7,9 +7,11 @@ const userSchema = new Schema(
       default: () => new Types.ObjectId(),
     },
     username: {
+      type: String,
       required: true,
       unique: true,
       trim: true,
+
     },
     email: {
       type: String,

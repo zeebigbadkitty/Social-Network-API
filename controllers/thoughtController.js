@@ -1,6 +1,6 @@
 //might have to adjust relative path to be ../models
 
-const Thought = require("../models/Thought");
+const {Thought, User} = require("../models");
 
 module.exports = {
   getThought(req, res) {
@@ -20,7 +20,17 @@ module.exports = {
   // create a new user
   createThought(req, res) {
     Thought.create(req.body)
-      .then((dbThoughtData) => res.json(dbThoughtData))
+      // .then((dbThoughtData) => res.json(dbThoughtData))
+      .then((thought) => 
+        !thought
+          ? res.status(404).json({ message: 'No thought with this id!' })
+          : User.findOneAndUpdate(
+              { username: req.body.username }, 
+              { $push: { thought: thought.thoughtId } },
+              { new: true }
+            )
+            .then((user) => res.json(user))
+              )
       .catch((err) => res.status(500).json(err));
   },
   updateThought(req, res) {

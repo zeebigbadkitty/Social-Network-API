@@ -1,4 +1,5 @@
-const User = require('../models/User');
+const {User, Thought} = require('../models');
+
 
 module.exports = {
   getUser(req, res) {
@@ -37,24 +38,34 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  // deleteUser(req, res) {
+  //   User.findOneAndRemove({ _id: req.params.userId }) //might have to be "userId"
+  //     .then((user) =>
+  //       !user
+  //         ? res.status(404).json({ message: 'No user with this id!' })
+  //         : User.findOneAndUpdate(
+  //             { _id: req.params.userId },
+  //             { $pull: { user: req.params.userId } },
+  //             { new: true }
+  //           )
+  //     )
+  //     .then((user) =>
+  //       !user
+  //         ? res.status(404).json({
+  //             message: 'User deleted but no thought found.',
+  //           })
+  //         : Thought.deleteMany({ _id: { $in: user.thought } })
+  //     )
+  //     .catch((err) => res.status(500).json(err));
+  // },
   deleteUser(req, res) {
-    User.findOneAndRemove({ _id: req.params.userId }) //might have to be "userId"
+    User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with this id!' })
-          : User.findOneAndUpdate(
-              { _id: req.params.userId },
-              { $pull: { user: req.params.userId } },
-              { new: true }
-            )
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : Thought.deleteMany({ _id: { $in: user.thought } })
       )
-      .then((user) =>
-        !user
-          ? res.status(404).json({
-              message: 'User created but no user with this id!',
-            })
-          : res.json({ message: 'User successfully deleted!' })
-      )
+      .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -75,7 +86,7 @@ module.exports = {
   deleteFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
@@ -96,3 +107,5 @@ module.exports = {
 //add friend
 
 //delete friend
+
+//when you delete the user you delete the thoughts. (RETURN: When you delete the thought, you update the user to remove the id from the thought array.)
