@@ -31,7 +31,7 @@ Once the server is running, you'll have to use a service like Insomnia or Mongo 
 ## Example
 
 ![Click here for a video demonstration.](https://drive.google.com/file/d/14HZfhwb7X7hvrTthrahbTJlKAclN2AIP/view)
-(https://drive.google.com/file/d/16rllJDHZFIwWd2vuD6YV9Np_RZ5iTB54/view?usp=share_link)
+![Demonstration:](/demo.gif)
 
 ## Credits
 
