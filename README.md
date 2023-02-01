@@ -30,7 +30,7 @@ Once the server is running, you'll have to use a service like Insomnia or Mongo 
 
 ## Example
 
-![Click here for a video demonstration.](https://drive.google.com/file/d/14HZfhwb7X7hvrTthrahbTJlKAclN2AIP/view)
+[Click here for a video demonstration.](https://drive.google.com/file/d/1qlJiD2_YSNyleD9bc-X-ZBunaGRd6UqQ/view?usp=sharing)<br>
 ![Demonstration:](/demo.gif)
 
 ## Credits
